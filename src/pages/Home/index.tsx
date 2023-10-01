@@ -1,10 +1,10 @@
 import Player from "@modules/Player";
-import PostAddInput from "./postAddInput";
+import PostSearcher from "@modules/PostSearcher";
 
 const Home: React.FC = () => {
   return (
     <div className="flex flex-col gap-y-24px">
-      <PostAddInput />
+      <PostSearcher />
       <Player />
     </div>
   );

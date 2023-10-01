@@ -3,19 +3,19 @@ import { useForm } from "react-hook-form";
 import Input from "@components/Input";
 import Button from "@components/Button";
 import { isValidPostInput, getId } from "@utils/url";
-import { useAddAudio } from "@services/posts";
+import { useSearchedAudio } from "@services/posts";
 
-const PostAddInput: React.FC = () => {
+const PostSearcher: React.FC = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<{ url: string }>();
-  const addAudio = useAddAudio();
+  const searchAudio = useSearchedAudio();
 
   const onSubmit = useCallback(async (data: { url: string }) => {
     try {
-      await addAudio(data.url);
+      await searchAudio(data.url);
     } catch (err) {
       console.log(err);
     }
@@ -23,7 +23,7 @@ const PostAddInput: React.FC = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col gap-y-24px"
+      className="flex flex-row gap-x-24px"
     >
       <Input
         type="text"
@@ -34,11 +34,11 @@ const PostAddInput: React.FC = () => {
         })}
         required
         error={!!errors.url}
-        title="post's lenster url or post id"
+        placeholder="post's url or post id"
       />
-      <Button>Add</Button>
+      <Button>Search</Button>
     </form>
   );
 };
 
-export default PostAddInput;
+export default PostSearcher;

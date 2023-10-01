@@ -1,5 +1,5 @@
 .balanceInput_wrapper {
-  @apply relative py-[8px] px-[12px] border-[1px] border-solid border-[#EAECEF] bg-white rounded-[2px] transition-colors;
+  @apply relative py-[8px] px-[12px] border-[1px] border-solid border-[#EAECEF] bg-white rounded-[8px] transition-colors;
 }
 
 .balanceInput_wrapper:focus-within {
@@ -7,7 +7,7 @@
 }
 
 .balanceInput {
-  @apply w-full text-[16px] overflow-ellipsis placeholder-[#D2D4DC] font-normal border-none outline-none text-[#303549] invalid:text-[#E96170];
+  @apply w-full text-[16px] overflow-ellipsis placeholder-[#969799] font-normal border-none outline-none text-[#303549] invalid:text-[#E96170];
 }
 
 .balanceInput_errorBorder {
@@ -32,4 +32,20 @@
 
 .balanceInput:disabled {
   @apply bg-transparent;
+}
+
+.balanceInput_wrapper.input--normal {
+  @apply text-[16px];
+}
+
+.balanceInput_wrapper.input--small {
+  @apply text-[12px];
+}
+
+.balanceInput_wrapper.input--normal > input {
+  @apply pl-[12px] h-[48px];
+}
+
+.balanceInput_wrapper.input--small > input {
+  @apply pl-[8px] h-[32px];
 }
