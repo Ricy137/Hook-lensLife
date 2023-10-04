@@ -1,0 +1,46 @@
+.burger-container {
+  @apply flex justify-center items-center h-full text-#000000  cursor-pointer;
+}
+
+.burger-check {
+  display: none;
+}
+
+.burger {
+  @apply relative inline-block w-2px h-24px bg-#000000  appearance-none;
+  transition: background-color 200ms ease-in-out 0s;
+}
+
+.burger::before {
+  content: "";
+  @apply absolute block w-2px h-full bg-#000000 left-12px;
+  transform: rotate(-60deg) translate3d(5px, -5px, 0);
+  transition: transform 0.2s ease-in-out 0s;
+}
+
+.burger::after {
+  content: "";
+  @apply absolute block w-2px h-full bg-#000000 left-12px;
+  transform: rotate(60deg) translate3d(3.5px, 4px, 0);
+  transition: transform 0.2s ease-in-out 0s;
+}
+
+.burger-check:checked ~ .burger {
+  @apply bg-transparent;
+}
+
+.burger-check:checked ~ .burger::before {
+  transform: rotate(-360deg) translate3d(-6px, 0, 0);
+}
+
+.burger-check:checked ~ .burger::after {
+  transform: rotate(360deg) translate3d(4px, 0, 0);
+}
+
+.nav-mobile {
+  backdrop-filter: blur(20px);
+}
+
+.nav-link-mobile--active::before {
+  @apply content-none absolute block h-24px w-4px bg-#000000  left-[-12px];
+}
