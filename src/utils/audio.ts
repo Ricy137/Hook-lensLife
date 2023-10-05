@@ -16,7 +16,7 @@ export const audioReducer = (
     type: 'initial' | 'setAudioSource';
     newState?: AudioState;
     newSource?: AudioBufferSourceNode | null;
-  }
+  },
 ) => {
   switch (action.type) {
     case 'initial':
@@ -44,7 +44,7 @@ export const audioLastTmReducer = (
     type: 'setLastElapsedTime' | 'setLastStartTime' | 'updateLastTm';
     newStartTime?: number;
     newLastElapsedTime?: number;
-  }
+  },
 ) => {
   switch (action.type) {
     case 'setLastElapsedTime':

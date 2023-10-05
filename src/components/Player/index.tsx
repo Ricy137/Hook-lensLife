@@ -1,1 +1,1 @@
-export * from "./SimplePlayer";
+export * from './SimplePlayer';

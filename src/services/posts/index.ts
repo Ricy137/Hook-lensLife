@@ -1,8 +1,8 @@
-import { useCallback } from "react";
-import { atom, useSetAtom } from "jotai";
-import { gql } from "@apollo/client";
-import { client } from "@modules/Providers";
-import { metaDataCheck } from "./metaData";
+import { useCallback } from 'react';
+import { atom, useSetAtom } from 'jotai';
+import { gql } from '@apollo/client';
+import { client } from '@modules/Providers';
+import { metaDataCheck } from './metaData';
 
 const POST_META = gql`
   query Publication($postId: InternalPublicationId!) {
@@ -60,7 +60,7 @@ export const useSearchedAudio = () => {
     const metaData = await fetchMeta(url);
     const metadata = metaDataCheck(metaData);
     const name = metadata.name;
-    const mediaUrl = metadata.media[0].original.url.split("//")[1];
+    const mediaUrl = metadata.media[0].original.url.split('//')[1];
     const coverUrl = metadata.cover?.original?.url;
     const content = metadata.content;
     setSearchedAudio({

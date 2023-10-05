@@ -45,7 +45,7 @@ export const SimplePlayer: React.FC<{ url: string }> = ({ url }) => {
         newSource: newSource,
       });
     },
-    [audioState]
+    [audioState],
   );
 
   const stop = useCallback(() => {

@@ -1,12 +1,7 @@
-import React from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 // import Navbar from "@modules/Navbar";
-import Home from "@pages/Home";
+import Home from '@pages/Home';
 
 const AppRouter: React.FC = () => {
   return (

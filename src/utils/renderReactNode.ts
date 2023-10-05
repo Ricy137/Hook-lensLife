@@ -1,17 +1,11 @@
-import React, { isValidElement, cloneElement } from "react";
-import type { ReactElement, ReactNode } from "react";
+import React, { isValidElement, cloneElement } from 'react';
+import type { ReactElement, ReactNode } from 'react';
 
-const renderReactNode = (
-  ele: ReactNode | Function,
-  props?: Record<string, any>
-) => {
+const renderReactNode = (ele: ReactNode | Function, props?: Record<string, any>) => {
   let node: React.ReactElement;
-  if (typeof ele === "function") {
+  if (typeof ele === 'function') {
     node = ele();
-  } else if (
-    typeof ele === "object" &&
-    typeof (ele as any)?.render === "function"
-  ) {
+  } else if (typeof ele === 'object' && typeof (ele as any)?.render === 'function') {
     node = (ele as any).render();
   } else {
     if (!props) {

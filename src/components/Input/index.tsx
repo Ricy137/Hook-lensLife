@@ -1,7 +1,7 @@
-"use client";
-import { forwardRef } from "react";
-import cx from "clsx";
-import style from "./style.module.css";
+'use client';
+import { forwardRef } from 'react';
+import cx from 'clsx';
+import style from './style.module.css';
 
 export type Props = OverWrite<
   React.InputHTMLAttributes<HTMLInputElement>,
@@ -29,38 +29,22 @@ const Input = forwardRef<HTMLInputElement, Props>(
       required,
       ...props
     },
-    ref
+    ref,
   ) => {
     return (
       <div className={cx(wrapperClassName)}>
         {title && (
-          <label
-            htmlFor={props.name}
-            className={cx(
-              "mb-[4px] text-[16px] text-[#62677B]",
-              lableClassName
-            )}
-          >
+          <label htmlFor={props.name} className={cx('mb-[4px] text-[16px] text-[#62677B]', lableClassName)}>
             {title}
             {required && <span className="ml-8px text-[#E96170]">*</span>}
           </label>
         )}
-        <div
-          className={cx(
-            style.balanceInput_wrapper,
-            error && "!border-[#E96170] !ring-[#E96170]",
-            className
-          )}
-        >
+        <div className={cx(style.balanceInput_wrapper, error && '!border-[#E96170] !ring-[#E96170]', className)}>
           <div className="flex justify-between items-center">
             <input
               ref={ref}
               step="0.000000000000000001"
-              className={cx(
-                style.balanceInput,
-                inputClassName,
-                error && "!text-[#E96170]"
-              )}
+              className={cx(style.balanceInput, inputClassName, error && '!text-[#E96170]')}
               autoComplete="off"
               defaultValue={defaultValue}
               onChange={onChange}
@@ -74,7 +58,7 @@ const Input = forwardRef<HTMLInputElement, Props>(
         </div>
       </div>
     );
-  }
+  },
 );
 
 export default Input;

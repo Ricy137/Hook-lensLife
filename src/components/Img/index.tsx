@@ -1,18 +1,13 @@
-import { useState, useEffect, ComponentProps } from "react";
-import DefaultImg from "@assets/default.svg";
-import cx from "clsx";
+import { useState, useEffect, ComponentProps } from 'react';
+import DefaultImg from '@assets/default.svg';
+import cx from 'clsx';
 
 //Progressive image (Next has default support for this)
-interface PImg extends ComponentProps<"img"> {
+interface PImg extends ComponentProps<'img'> {
   placeHolderSrc?: string;
   src: string;
 }
-const Img: React.FC<PImg> = ({
-  placeHolderSrc = DefaultImg,
-  src,
-  className,
-  ...props
-}) => {
+const Img: React.FC<PImg> = ({ placeHolderSrc = DefaultImg, src, className, ...props }) => {
   const [imgSrc, setImgSrc] = useState(placeHolderSrc || src);
 
   useEffect(() => {
@@ -23,14 +18,7 @@ const Img: React.FC<PImg> = ({
     };
   }, [src]);
 
-  return (
-    <img
-      className={cx("pointer-events-none select-none", className)}
-      src={imgSrc}
-      {...props}
-      draggable={false}
-    />
-  );
+  return <img className={cx('pointer-events-none select-none', className)} src={imgSrc} {...props} draggable={false} />;
 };
 
 export default Img;

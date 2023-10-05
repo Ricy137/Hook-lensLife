@@ -1,16 +1,11 @@
-import { PropsWithChildren } from "react";
+import { PropsWithChildren } from 'react';
 // import { WagmiConfig, createConfig, configureChains } from "wagmi";
 // import { celoAlfajores } from "wagmi/chains";
 // import { publicProvider } from "wagmi/providers/public";
 // import { InjectedConnector } from "wagmi/connectors/injected";
 // import { WalletConnectConnector } from "wagmi/connectors/walletConnect";
-import {
-  ApolloProvider,
-  ApolloClient,
-  createHttpLink,
-  InMemoryCache,
-} from "@apollo/client";
-import { LENS_API_URL } from "@utils/constants";
+import { ApolloProvider, ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
+import { LENS_API_URL } from '@utils/constants';
 
 // const { publicClient, chains } = configureChains(
 //   [celoAlfajores],

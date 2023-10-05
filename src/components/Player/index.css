@@ -12,14 +12,14 @@
 }
 
 .burger::before {
-  content: "";
+  content: '';
   @apply absolute block w-2px h-full bg-#000000 left-12px;
   transform: rotate(-60deg) translate3d(5px, -5px, 0);
   transition: transform 0.2s ease-in-out 0s;
 }
 
 .burger::after {
-  content: "";
+  content: '';
   @apply absolute block w-2px h-full bg-#000000 left-12px;
   transform: rotate(60deg) translate3d(3.5px, 4px, 0);
   transition: transform 0.2s ease-in-out 0s;

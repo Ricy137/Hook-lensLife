@@ -1,32 +1,17 @@
-import {
-  ComponentProps,
-  MouseEvent,
-  useCallback,
-  useRef,
-  useEffect,
-  useState,
-  useLayoutEffect,
-} from "react";
-import cx from "clsx";
-import { CommentEllipseIcon } from "@components/Icons";
-import { periodToPersent, PersentToPeriod } from "@utils/rateUtils";
+import { ComponentProps, MouseEvent, useCallback, useRef, useEffect, useState, useLayoutEffect } from 'react';
+import cx from 'clsx';
+import { CommentEllipseIcon } from '@components/Icons';
+import { periodToPersent, PersentToPeriod } from '@utils/rateUtils';
 
 const Progress: React.FC<
-  ComponentProps<"div"> & {
+  ComponentProps<'div'> & {
     width?: number;
     disable?: boolean;
     initialValue?: number;
     totalValue: number;
     handleProgressChange?: (value: number) => void;
   }
-> = ({
-  width,
-  disable = false,
-  initialValue,
-  totalValue,
-  handleProgressChange,
-  ...props
-}) => {
+> = ({ width, disable = false, initialValue, totalValue, handleProgressChange, ...props }) => {
   const [origionX, setOrigionX] = useState<{ left: number; right: number }>({
     left: 0,
     right: 0,
@@ -37,17 +22,13 @@ const Progress: React.FC<
   const handleClick = useCallback(
     (e: MouseEvent) => {
       let leftX = Math.floor(e.clientX - origionX.left);
-      let newPercent = periodToPersent(
-        leftX,
-        origionX.right - origionX.left,
-        100
-      );
+      let newPercent = periodToPersent(leftX, origionX.right - origionX.left, 100);
       if (leftX >= 0 && newPercent <= 100) {
         setX(leftX);
         handleProgressChange?.(newPercent);
       }
     },
-    [origionX, handleProgressChange]
+    [origionX, handleProgressChange],
   );
 
   const getClientX = useCallback(() => {
@@ -75,11 +56,7 @@ const Progress: React.FC<
   }, [containerRef]);
 
   useEffect(() => {
-    const newX = PersentToPeriod(
-      initialValue!,
-      origionX.right - origionX.left,
-      totalValue
-    );
+    const newX = PersentToPeriod(initialValue!, origionX.right - origionX.left, totalValue);
     setX(newX);
   }, [containerRef, initialValue, origionX]);
 
@@ -90,8 +67,8 @@ const Progress: React.FC<
       return;
     }
     handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, [containerRef]);
 
   return (
@@ -102,14 +79,8 @@ const Progress: React.FC<
       onClick={handleClick}
       aria-disabled
     >
-      <div
-        className={cx("h-full rounded-41px bg-#FFA14A")}
-        style={{ width: `${x + 1}px` }}
-      />
-      <CommentEllipseIcon
-        className={cx("absolute top-50% -translate-y-50% z-20")}
-        style={{ left: `${x - 14}px` }}
-      />
+      <div className={cx('h-full rounded-41px bg-#FFA14A')} style={{ width: `${x + 1}px` }} />
+      <CommentEllipseIcon className={cx('absolute top-50% -translate-y-50% z-20')} style={{ left: `${x - 14}px` }} />
     </div>
   );
 };

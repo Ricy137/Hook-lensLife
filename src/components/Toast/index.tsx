@@ -1,12 +1,12 @@
-import React, { useCallback } from "react";
-import cx from "clsx";
-import { uniqueId } from "lodash-es";
-import { atom, useAtom, useAtomValue } from "jotai";
-import { CheckedIcon, FailedIcon } from "@components/Icons";
+import React, { useCallback } from 'react';
+import cx from 'clsx';
+import { uniqueId } from 'lodash-es';
+import { atom, useAtom, useAtomValue } from 'jotai';
+import { CheckedIcon, FailedIcon } from '@components/Icons';
 
 interface Toast {
   content: string | React.ReactNode;
-  type: "success" | "warning" | "failed";
+  type: 'success' | 'warning' | 'failed';
   id: string;
   key?: string;
 }
@@ -17,14 +17,10 @@ export const useShowToast = () => {
   const [toasts, setToasts] = useAtom(toastAtom);
 
   const showToast = useCallback(
-    (param: Omit<Toast, "id"> & { key?: string; duration?: number }) => {
-      if (
-        param.key &&
-        toasts.find((item: Toast) => item.key && item.key === param.key)
-      )
-        return;
+    (param: Omit<Toast, 'id'> & { key?: string; duration?: number }) => {
+      if (param.key && toasts.find((item: Toast) => item.key && item.key === param.key)) return;
       let newToasts = toasts ? [...toasts] : [];
-      const id = uniqueId("toast_");
+      const id = uniqueId('toast_');
       newToasts.push({ ...param, id });
       setToasts(newToasts);
       setTimeout(() => {
@@ -35,7 +31,7 @@ export const useShowToast = () => {
         });
       }, param.duration || 3000);
     },
-    [toasts]
+    [toasts],
   );
 
   return showToast;
@@ -50,12 +46,12 @@ export const ToastRender: React.FC = () => {
         <div
           key={id}
           className={cx(
-            "px-[24px] h-[48px] flex flex-row sm:justify-between items-center gap-x-[16px] w-[90%] sm:w-fit bg-[#ffffff] rounded-[24px] z-[40] task-card-shadow",
-            type === "success" && "text-[#1E8E3E]",
-            type === "warning" || (type === "failed" && "text-[#D93026]")
+            'px-[24px] h-[48px] flex flex-row sm:justify-between items-center gap-x-[16px] w-[90%] sm:w-fit bg-[#ffffff] rounded-[24px] z-[40] task-card-shadow',
+            type === 'success' && 'text-[#1E8E3E]',
+            type === 'warning' || (type === 'failed' && 'text-[#D93026]'),
           )}
         >
-          {type === "success" ? (
+          {type === 'success' ? (
             <CheckedIcon className="w-[14px] h-[40px]" />
           ) : (
             <FailedIcon className="w-[14px] h-[40px]" />

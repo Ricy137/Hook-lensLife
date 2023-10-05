@@ -1,5 +1,5 @@
 //TODO: tooltip, Modal can abstract out popup
-import { ReactNode, useCallback } from "react";
+import { ReactNode, useCallback } from 'react';
 import {
   useFloating,
   useClick,
@@ -9,11 +9,11 @@ import {
   useId,
   FloatingOverlay,
   FloatingFocusManager,
-} from "@floating-ui/react";
-import { atom, useAtom, useSetAtom } from "jotai";
-import cx from "clsx";
-import { uniqueId } from "lodash-es";
-import renderReactNode from "@utils/renderReactNode";
+} from '@floating-ui/react';
+import { atom, useAtom, useSetAtom } from 'jotai';
+import cx from 'clsx';
+import { uniqueId } from 'lodash-es';
+import renderReactNode from '@utils/renderReactNode';
 
 export interface Modal {
   id: string;
@@ -26,7 +26,7 @@ export interface Modal {
 const isOpenAtom = atom(false);
 const modalAtom = atom<Modal | null>(null);
 
-export const useModal = (param?: Omit<Modal, "id">) => {
+export const useModal = (param?: Omit<Modal, 'id'>) => {
   const setIsOpen = useSetAtom(isOpenAtom);
   const setModal = useSetAtom(modalAtom);
 
@@ -61,16 +61,12 @@ const ModalRender: React.FC = () => {
   const click = useClick(context);
 
   const dismiss = useDismiss(context, {
-    outsidePressEvent: "mousedown",
+    outsidePressEvent: 'mousedown',
   });
 
   const role = useRole(context);
 
-  const { getReferenceProps, getFloatingProps } = useInteractions([
-    click,
-    dismiss,
-    role,
-  ]);
+  const { getReferenceProps, getFloatingProps } = useInteractions([click, dismiss, role]);
 
   const labelId = useId();
 
@@ -82,11 +78,8 @@ const ModalRender: React.FC = () => {
       {isOpen && (
         <FloatingOverlay
           lockScroll
-          style={{ background: "rgba(0, 0, 0, 0.8)", zIndex: 1000 }}
-          className={cx(
-            "flex items-center justify-center",
-            modal?.containerClass
-          )}
+          style={{ background: 'rgba(0, 0, 0, 0.8)', zIndex: 1000 }}
+          className={cx('flex items-center justify-center', modal?.containerClass)}
         >
           <FloatingFocusManager context={context}>
             <div
@@ -95,16 +88,11 @@ const ModalRender: React.FC = () => {
               aria-describedby={descriptionId}
               {...getFloatingProps()}
             >
-              <div
-                className={cx(
-                  "p-24px md:40px rounded-30px bg-#ffffff",
-                  modal?.wrapperClass
-                )}
-              >
+              <div className={cx('p-24px md:40px rounded-30px bg-#ffffff', modal?.wrapperClass)}>
                 <div
                   className={cx(
-                    "flex justify-between items-center h-40px text-18px leading-26px text-#111111 font-medium",
-                    modal?.headClass
+                    'flex justify-between items-center h-40px text-18px leading-26px text-#111111 font-medium',
+                    modal?.headClass,
                   )}
                 >
                   {modal?.title}

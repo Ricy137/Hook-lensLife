@@ -1,9 +1,9 @@
-import { useCallback } from "react";
-import { useForm } from "react-hook-form";
-import Input from "@components/Input";
-import Button from "@components/Button";
-import { isValidPostInput, getId } from "@utils/url";
-import { useSearchedAudio } from "@services/posts";
+import { useCallback } from 'react';
+import { useForm } from 'react-hook-form';
+import Input from '@components/Input';
+import Button from '@components/Button';
+import { isValidPostInput, getId } from '@utils/url';
+import { useSearchedAudio } from '@services/posts';
 
 const PostSearcher: React.FC = () => {
   const {
@@ -21,13 +21,10 @@ const PostSearcher: React.FC = () => {
     }
   }, []);
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-row gap-x-24px"
-    >
+    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-row gap-x-24px">
       <Input
         type="text"
-        {...register("url", {
+        {...register('url', {
           required: true,
           validate: isValidPostInput,
           setValueAs: (value) => getId(value),

@@ -1,5 +1,5 @@
-import PostSearcher from "@modules/PostSearcher";
-import PreviewPlayer from "./PreviewPlayer";
+import PostSearcher from '@modules/PostSearcher';
+import PreviewPlayer from './PreviewPlayer';
 
 const Home: React.FC = () => {
   return (
