@@ -1,31 +1,20 @@
-import { useState, useCallback, useEffect, useReducer } from "react";
-import Progress from "@components/Progress";
-import {
-  dfAudioState,
-  audioReducer,
-  dfAudioLastTmState,
-  audioLastTmReducer,
-} from "@utils/audio";
-import "./index.css";
+import { useState, useCallback, useEffect, useReducer } from 'react';
+import Progress from '@components/Progress';
+import { dfAudioState, audioReducer, dfAudioLastTmState, audioLastTmReducer } from '@utils/audio';
+import './index.css';
 
 export const SimplePlayer: React.FC<{ url: string }> = ({ url }) => {
   const [playing, setPlaying] = useState(false);
   const [elapsedTime, setElapsedTime] = useState(0);
-  const [lastTime, lastTimeDispatch] = useReducer(
-    audioLastTmReducer,
-    dfAudioLastTmState
-  );
-  const [audioState, audioStateDispatch] = useReducer(
-    audioReducer,
-    dfAudioState
-  );
+  const [lastTime, lastTimeDispatch] = useReducer(audioLastTmReducer, dfAudioLastTmState);
+  const [audioState, audioStateDispatch] = useReducer(audioReducer, dfAudioState);
   const initialSource = useCallback(async () => {
     try {
       const audioCtx = new AudioContext();
       const arrayBuffer = await fetch(url).then((res) => res.arrayBuffer());
       const audioBuffer = await audioCtx.decodeAudioData(arrayBuffer);
       audioStateDispatch({
-        type: "initial",
+        type: 'initial',
         newState: {
           audioCtx,
           audioBuffer,
@@ -33,7 +22,7 @@ export const SimplePlayer: React.FC<{ url: string }> = ({ url }) => {
         },
       });
     } catch (err) {
-      console.log("err", err);
+      console.log('err', err);
     }
   }, []);
 
@@ -48,11 +37,11 @@ export const SimplePlayer: React.FC<{ url: string }> = ({ url }) => {
       newSource.connect(audioState.audioCtx.destination);
       newSource?.start(0, elapsedTime);
       lastTimeDispatch({
-        type: "setLastStartTime",
+        type: 'setLastStartTime',
         newStartTime: audioState.audioCtx.currentTime,
       });
       audioStateDispatch({
-        type: "setAudioSource",
+        type: 'setAudioSource',
         newSource: newSource,
       });
     },
@@ -64,16 +53,13 @@ export const SimplePlayer: React.FC<{ url: string }> = ({ url }) => {
       return;
     }
     audioState.audioSource?.stop();
-    const elapsedTime =
-      lastTime.lastElapsedTime +
-      audioState.audioCtx.currentTime -
-      lastTime.lastStartTime;
+    const elapsedTime = lastTime.lastElapsedTime + audioState.audioCtx.currentTime - lastTime.lastStartTime;
     lastTimeDispatch({
-      type: "setLastElapsedTime",
+      type: 'setLastElapsedTime',
       newLastElapsedTime: elapsedTime,
     });
     audioStateDispatch({
-      type: "setAudioSource",
+      type: 'setAudioSource',
       newSource: null,
     });
   }, [audioState]);
@@ -97,11 +83,7 @@ export const SimplePlayer: React.FC<{ url: string }> = ({ url }) => {
 
   // update elapsedTime
   useEffect(() => {
-    if (
-      !audioState.audioCtx ||
-      !audioState.audioSource ||
-      !audioState.audioBuffer
-    ) {
+    if (!audioState.audioCtx || !audioState.audioSource || !audioState.audioBuffer) {
       return;
     }
     const intervalAudio = setInterval(() => {
@@ -111,10 +93,7 @@ export const SimplePlayer: React.FC<{ url: string }> = ({ url }) => {
       } else {
         setElapsedTime(() => {
           if (audioState.audioCtx) {
-            const newElapsedTime =
-              lastTime.lastElapsedTime +
-              audioState.audioCtx.currentTime -
-              lastTime.lastStartTime;
+            const newElapsedTime = lastTime.lastElapsedTime + audioState.audioCtx.currentTime - lastTime.lastStartTime;
             return newElapsedTime;
           }
           return 0;

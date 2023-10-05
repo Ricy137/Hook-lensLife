@@ -13,15 +13,15 @@ export const dfAudioState: AudioState = {
 export const audioReducer = (
   state: AudioState,
   action: {
-    type: "initial" | "setAudioSource";
+    type: 'initial' | 'setAudioSource';
     newState?: AudioState;
     newSource?: AudioBufferSourceNode | null;
   }
 ) => {
   switch (action.type) {
-    case "initial":
+    case 'initial':
       return action.newState ?? dfAudioState;
-    case "setAudioSource":
+    case 'setAudioSource':
       return { ...state, audioSource: action.newSource ?? null };
     default:
       return state;
@@ -41,23 +41,23 @@ export const dfAudioLastTmState = {
 export const audioLastTmReducer = (
   state: AudioLastTmState,
   action: {
-    type: "setLastElapsedTime" | "setLastStartTime" | "updateLastTm";
+    type: 'setLastElapsedTime' | 'setLastStartTime' | 'updateLastTm';
     newStartTime?: number;
     newLastElapsedTime?: number;
   }
 ) => {
   switch (action.type) {
-    case "setLastElapsedTime":
+    case 'setLastElapsedTime':
       return {
         ...state,
         lastElapsedTime: action.newLastElapsedTime ?? state.lastElapsedTime,
       };
-    case "setLastStartTime":
+    case 'setLastStartTime':
       return {
         ...state,
         lastStartTime: action.newStartTime ?? state.lastStartTime,
       };
-    case "updateLastTm":
+    case 'updateLastTm':
       return {
         lastElapsedTime: action.newLastElapsedTime ?? state.lastElapsedTime,
         lastStartTime: action.newStartTime ?? state.lastStartTime,
