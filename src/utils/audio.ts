@@ -16,7 +16,7 @@ export const audioReducer = (
     type: 'initial' | 'setAudioSource';
     newState?: AudioState;
     newSource?: AudioBufferSourceNode | null;
-  },
+  }
 ) => {
   switch (action.type) {
     case 'initial':
@@ -44,7 +44,7 @@ export const audioLastTmReducer = (
     type: 'setLastElapsedTime' | 'setLastStartTime' | 'updateLastTm';
     newStartTime?: number;
     newLastElapsedTime?: number;
-  },
+  }
 ) => {
   switch (action.type) {
     case 'setLastElapsedTime':
@@ -63,4 +63,34 @@ export const audioLastTmReducer = (
         lastStartTime: action.newStartTime ?? state.lastStartTime,
       };
   }
+};
+
+export const combineBuffers = (audioBuffers: AudioBuffer[], audioCtx: AudioContext) => {
+  const combinedBuffer = audioBuffers.reduce((result, buffer) => {
+    const newLength = result.length + buffer.length;
+    const newBuffer = audioCtx.createBuffer(1, newLength, audioCtx.sampleRate);
+    newBuffer.copyToChannel(result.getChannelData(0), 0);
+    newBuffer.copyToChannel(buffer.getChannelData(0), 0, result.length);
+    return newBuffer;
+  }, audioCtx.createBuffer(1, 0, audioCtx.sampleRate));
+
+  return combinedBuffer;
+};
+
+export const createSource = (buffer: AudioBuffer, audioCtx: AudioContext) => {
+  const source = audioCtx.createBufferSource();
+  // Create a gain node.
+  const gainNode = audioCtx.createGain();
+  source.buffer = buffer;
+  // Turn on looping.
+  source.loop = true;
+  // Connect source to gain.
+  source.connect(gainNode);
+  // Connect gain to destination.
+  gainNode.connect(audioCtx.destination);
+
+  return {
+    source: source,
+    gainNode: gainNode,
+  };
 };
